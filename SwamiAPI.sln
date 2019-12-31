@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwamiAPI", "SwamiAPI.csproj", "{FAEC9D9D-789B-4E2E-9D8E-08A460D42892}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAEC9D9D-789B-4E2E-9D8E-08A460D42892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAEC9D9D-789B-4E2E-9D8E-08A460D42892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAEC9D9D-789B-4E2E-9D8E-08A460D42892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAEC9D9D-789B-4E2E-9D8E-08A460D42892}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91AD42FA-DF64-47E0-83FA-B0D2EEBAD4FA}
+	EndGlobalSection
+EndGlobal
