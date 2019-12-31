@@ -31,9 +31,9 @@ namespace SwamiAPI.Controllers
 
         // GET: api/Games/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public IEnumerable<Game> Get(string id)
         {
-            return "value";
+            return GetOneGame(id);
         }
 
         // POST: api/Games
@@ -68,6 +68,24 @@ namespace SwamiAPI.Controllers
                 myGames = releases.ToObject<List<Game>>();
 
                 return myGames;
+            }
+        }
+
+        private static List<Game> GetOneGame(string id)
+        {
+
+            //Route
+            using (var httpClient = new HttpClient())
+            {
+                string tempurl = url + "/" + id;
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+                var response = httpClient.GetStringAsync(new Uri(tempurl)).Result;
+
+                var releases = JArray.Parse(response);
+                Console.WriteLine(releases);
+                List<Game> myGame = releases.ToObject<List<Game>>();
+
+                return myGame;
             }
         }
 
