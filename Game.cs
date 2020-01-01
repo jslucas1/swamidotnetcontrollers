@@ -35,7 +35,21 @@ namespace SwamiAPI
 
             Team tempFavorite = myTeams.Find(x => x._id == this.favorite);
             Team tempUnderdog = myTeams.Find(x => x._id == this.underdog);
-            this.name = tempFavorite.name + " vs " + tempUnderdog.name;
+            if(this.homeTeam == "favorite")
+            {
+                this.name = "At " + tempFavorite.name + " vs " + tempUnderdog.name;
+            }
+            else
+            {
+                if(this.homeTeam == "underdog")
+                {
+                    this.name = tempFavorite.name + " vs At " + tempUnderdog.name;
+                }
+                else
+                {
+                    this.name = tempFavorite.name + " vs " + tempUnderdog.name;
+                }
+            } 
         }
 
         public string _id { get; set; }
