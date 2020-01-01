@@ -14,6 +14,19 @@ namespace SwamiAPI
         private int wallet;
         private Boolean wagerAvlb;
         private Boolean wagerOverride;
+
+        public User(string id, string name, string password, string email, string nickname, int wallet, bool wagerAvlb, bool wagerOverride)
+        {
+            _id = id;
+            this.name = name;
+            this.password = password;
+            this.email = email;
+            this.nickname = nickname;
+            this.wallet = wallet;
+            this.wagerAvlb = wagerAvlb;
+            this.wagerOverride = wagerOverride;
+        }
+
         public string _id { get; set; }
         public string Name { get => name; set => name = value; }
         public string Password { get => password; set => password = value; }
