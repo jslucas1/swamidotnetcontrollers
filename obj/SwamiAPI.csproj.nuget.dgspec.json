@@ -61,10 +61,6 @@
               "target": "Package",
               "version": "[3.1.0, )"
             },
-            "Microsoft.EntityFrameworkCore.Toolscls": {
-              "target": "Package",
-              "version": "(, )"
-            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.0, )"
