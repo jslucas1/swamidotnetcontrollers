@@ -25,17 +25,24 @@ namespace SwamiAPI.Controllers
         public IEnumerable<Game> Get()
         {   
             GetAllGames();
-            //SetWinners();
             return myGames;
         }
 
         // GET: api/Games/5
         [HttpGet("{id}", Name = "Get")]
-        public IEnumerable<Game> Get(string id)
+        public string Get(string id)
         {
             return GetOneGame(id);
         }
 
+        // GET: api/Games/Week
+        [HttpGet("week/{week}")]
+        public IEnumerable<Game> GetWeek(string week)
+        {
+            List<Game> weekGames = GetWeekGames(week);
+            
+            return weekGames;
+        }
         // POST: api/Games
         [HttpPost]
         public void Post([FromBody] string value)
@@ -71,7 +78,27 @@ namespace SwamiAPI.Controllers
             }
         }
 
-        private static List<Game> GetOneGame(string id)
+        private static List<Game> GetWeekGames(string week)
+        {
+
+            //Route
+            using (var httpClient = new HttpClient())
+            {
+                
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+                var response = httpClient.GetStringAsync(new Uri(url+"/week/"+week)).Result;
+
+                var releases = JArray.Parse(response);
+                Console.WriteLine(releases);
+                List<Game> myWeekGames = releases.ToObject<List<Game>>();
+
+                return myWeekGames;
+            }
+
+
+        }
+
+        private static string GetOneGame(string id)
         {
 
             //Route
@@ -81,11 +108,7 @@ namespace SwamiAPI.Controllers
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
                 var response = httpClient.GetStringAsync(new Uri(tempurl)).Result;
 
-                var releases = JArray.Parse(response);
-                Console.WriteLine(releases);
-                List<Game> myGame = releases.ToObject<List<Game>>();
-
-                return myGame;
+                return response;
             }
         }
 
