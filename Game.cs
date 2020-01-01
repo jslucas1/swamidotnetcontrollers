@@ -35,7 +35,6 @@ namespace SwamiAPI
         }
 
         public string _id { get; set; }
-
         public string Name { get => name; set => name = value; }
         public string Favorite { get => favorite; set => favorite = value; }
         public string Underdog { get => underdog; set => underdog = value; }
