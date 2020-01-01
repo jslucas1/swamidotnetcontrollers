@@ -60,7 +60,7 @@ namespace SwamiAPI.Controllers
             }
         }
 
-        private static List<Team> GetAllTeams()
+        public static List<Team> GetAllTeams()
         {
 
             //Route

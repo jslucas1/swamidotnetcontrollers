@@ -18,11 +18,11 @@ namespace SwamiAPI
         private string winner;
         private string homeTeam;
 
+        private static List<Team> myTeams = Team.GetAllTeams();
         public Game(string name, string id, string favorite, string underdog, double line, int week, string date, 
                     int favoriteScore, int underdogScore, string winner, string homeTeam)
         {
             _id = id;
-            this.name = favorite + " vs " + underdog;
             this.favorite = favorite;
             this.underdog = underdog;
             this.line = line;
@@ -32,6 +32,10 @@ namespace SwamiAPI
             this.underdogScore = underdogScore;
             this.winner = winner;
             this.homeTeam = homeTeam;
+
+            Team tempFavorite = myTeams.Find(x => x._id == this.favorite);
+            Team tempUnderdog = myTeams.Find(x => x._id == this.underdog);
+            this.name = tempFavorite.name + " vs " + tempUnderdog.name;
         }
 
         public string _id { get; set; }
