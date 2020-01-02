@@ -43,12 +43,23 @@ namespace SwamiAPI.Controllers
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+        public void Put(string id, [FromBody] string value)
+        {     
+            string tempurl = url + "/" + id;
+            
+            using (var httpClient = new HttpClient())
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(value).ToString(), Encoding.UTF8, "application/json");
+                Console.WriteLine(content);
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+
+                var response = httpClient.PutAsync(new Uri(tempurl), content).Result;
+                
+            }
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+    // DELETE: api/ApiWithActions/5
+    [HttpDelete("{id}")]
         public void Delete(string id)
         {
             using (var httpClient = new HttpClient())
