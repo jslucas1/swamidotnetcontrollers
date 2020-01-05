@@ -10,6 +10,8 @@ namespace SwamiAPI
         private string name;
         private string favorite;
         private string underdog;
+        private string favoriteName;
+        private string underdogName;
         private double line;
         private int week;
         private string date;
@@ -35,6 +37,9 @@ namespace SwamiAPI
 
             Team tempFavorite = myTeams.Find(x => x._id == this.favorite);
             Team tempUnderdog = myTeams.Find(x => x._id == this.underdog);
+            favoriteName = tempFavorite.name;
+            underdogName = tempUnderdog.name;
+
             if(this.homeTeam == "favorite")
             {
                 this.name = "At " + tempFavorite.name + " vs " + tempUnderdog.name;
@@ -63,5 +68,7 @@ namespace SwamiAPI
         public int UnderdogScore { get => underdogScore; set => underdogScore = value; }
         public string Winner { get => winner; set => winner = value; }
         public string HomeTeam { get => homeTeam; set => homeTeam = value; }
+        public string FavoriteName { get => favoriteName; set => favoriteName = value; }
+        public string UnderdogName { get => underdogName; set => underdogName = value; }
     }
 }

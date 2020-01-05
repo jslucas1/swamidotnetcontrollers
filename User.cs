@@ -15,6 +15,10 @@ namespace SwamiAPI
         private Boolean wagerAvlb;
         private Boolean wagerOverride;
 
+        public User()
+        {
+
+        }
         public User(string id, string name, string password, string email, string nickname, int wallet, bool wagerAvlb, bool wagerOverride)
         {
             _id = id;
@@ -35,5 +39,19 @@ namespace SwamiAPI
         public int Wallet { get => wallet; set => wallet = value; }
         public bool WagerAvlb { get => wagerAvlb; set => wagerAvlb = value; }
         public bool WagerOverride { get => wagerOverride; set => wagerOverride = value; }
+
+        public override string ToString()
+        {
+            return _id + " " + name + " " + email + " " + wallet;
+        }
+
+        public string ToJSON()
+        {
+            string temp = "{\"name\": \"" + name + "\",\"password\": \"" + password +
+                            "\",\"email\": \"" + email + "\",\"nickname\": \"" + nickname +
+                            "\",\"wallet\": " + wallet + ",\"wagerOverride\": " + wagerOverride + "}";
+
+            return temp;
+        }
     }
 }
