@@ -35,6 +35,13 @@ namespace SwamiAPI.Controllers
             return GetOneUser(id);
         }
 
+        // GET: api/Users/email/email@email.com
+        [HttpGet("email/{email}", Name = "GetUserByEmail")]
+        public string GetUserByEmail(string email)
+        {
+            return GetOneUserByEmail(email);
+        }
+
         // POST: api/Users
         [HttpPost]
         public void Post([FromBody] string value)
@@ -46,26 +53,23 @@ namespace SwamiAPI.Controllers
         public void Put(string id, [FromBody] User value)
         {
             string tempurl = url + "/" + id;
-            //Console.WriteLine("temp url is " + tempurl);
-           // Console.WriteLine("The passed in object tostring is " + value.ToString());
-            User tempUser = (User)value;
-           // Console.WriteLine("The object toJason" + tempUser.ToJSON());
+            //Console.WriteLine("We made it and the user is " + value.ToJSON());
 
-           
+            var content = new StringContent(JsonConvert.SerializeObject(value).ToString(), Encoding.UTF8, "application/json");
+
             using (var httpClient = new HttpClient())
             {
-                //var content = new StringContent(JsonConvert.SerializeObject(value).ToString(), Encoding.UTF8, "application/json");
-                var content = new StringContent(JsonConvert.SerializeObject(value).ToString(), Encoding.UTF8, "text/plain");
-                Console.WriteLine("Value of content " + content.ToString());
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+
                 var response = httpClient.PutAsync(new Uri(tempurl), content).Result;
-               // var response = httpClient.PutAsync(new Uri(tempurl), tempUser.ToJSON()).Result;
+
             }
-           
+
+
         }
 
-    // DELETE: api/ApiWithActions/5
-    [HttpDelete("{id}")]
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("{id}")]
         public void Delete(string id)
         {
             using (var httpClient = new HttpClient())
@@ -100,6 +104,20 @@ namespace SwamiAPI.Controllers
             using (var httpClient = new HttpClient())
             {
                 string tempurl = url + "/" + id;
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+                var response = httpClient.GetStringAsync(new Uri(tempurl)).Result;
+
+                return response;
+            }
+        }
+
+        private static string GetOneUserByEmail(string email)
+        {
+
+            //Route
+            using (var httpClient = new HttpClient())
+            {
+                string tempurl = url + "/email/" + email;
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
                 var response = httpClient.GetStringAsync(new Uri(tempurl)).Result;
 

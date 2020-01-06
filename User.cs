@@ -7,19 +7,19 @@ namespace SwamiAPI
 {
     public class User
     {
-        private string name;
-        private string password;
-        private string email;
-        private string nickname;
-        private int wallet;
-        private Boolean wagerAvlb;
-        private Boolean wagerOverride;
+        public string name { get; set; }
+        public string password { get; set; }
+        public string email { get; set; }
+        public string nickname { get; set; } 
+        public int wallet { get; set; }
+        //   private Boolean wagerAvlb;
+        //   private Boolean wagerOverride;
 
         public User()
         {
 
         }
-        public User(string id, string name, string password, string email, string nickname, int wallet, bool wagerAvlb, bool wagerOverride)
+        public User(string id, string name, string password, string email, string nickname, int wallet/*, bool wagerAvlb, bool wagerOverride*/)
         {
             _id = id;
             this.name = name;
@@ -27,31 +27,33 @@ namespace SwamiAPI
             this.email = email;
             this.nickname = nickname;
             this.wallet = wallet;
-            this.wagerAvlb = wagerAvlb;
-            this.wagerOverride = wagerOverride;
+         //   this.wagerAvlb = wagerAvlb;
+         //   this.wagerOverride = wagerOverride;
         }
 
         public string _id { get; set; }
+        /*
         public string Name { get => name; set => name = value; }
         public string Password { get => password; set => password = value; }
         public string Email { get => email; set => email = value; }
         public string Nickname { get => nickname; set => nickname = value; }
         public int Wallet { get => wallet; set => wallet = value; }
-        public bool WagerAvlb { get => wagerAvlb; set => wagerAvlb = value; }
-        public bool WagerOverride { get => wagerOverride; set => wagerOverride = value; }
+        */
+        // public bool WagerAvlb { get => wagerAvlb; set => wagerAvlb = value; }
+        // public bool WagerOverride { get => wagerOverride; set => wagerOverride = value; }
 
         public override string ToString()
         {
             return _id + " " + name + " " + email + " " + wallet;
         }
 
-        public string ToJSON()
+       /* public string ToJSON()
         {
             string temp = "{\"name\": \"" + name + "\",\"password\": \"" + password +
                             "\",\"email\": \"" + email + "\",\"nickname\": \"" + nickname +
                             "\",\"wallet\": " + wallet + ",\"wagerOverride\": " + wagerOverride + "}";
 
             return temp;
-        }
+        }*/
     }
 }
