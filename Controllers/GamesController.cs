@@ -38,7 +38,6 @@ namespace SwamiAPI.Controllers
         [HttpGet("setwinners/{mode}", Name = "SetWinner")]
         public string SetWinner(string mode)
         {
-            Console.WriteLine("To the endpoint");
             SetWinners(mode);
             return "{ complete }";
         }

@@ -14,6 +14,11 @@ namespace SwamiAPI
         public int amount { get; set; }
         public int week { get; set; }
 
+        public Wager()
+        {
+
+        }
+
         public Wager(string id, string user, string game, string team, int amount, int week)
         {
             _id = id;
