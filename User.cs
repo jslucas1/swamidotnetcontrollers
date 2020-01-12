@@ -32,28 +32,11 @@ namespace SwamiAPI
         }
 
         public string _id { get; set; }
-        /*
-        public string Name { get => name; set => name = value; }
-        public string Password { get => password; set => password = value; }
-        public string Email { get => email; set => email = value; }
-        public string Nickname { get => nickname; set => nickname = value; }
-        public int Wallet { get => wallet; set => wallet = value; }
-        */
-        // public bool WagerAvlb { get => wagerAvlb; set => wagerAvlb = value; }
-        // public bool WagerOverride { get => wagerOverride; set => wagerOverride = value; }
-
+       
         public override string ToString()
         {
             return _id + " " + name + " " + email + " " + wallet;
         }
 
-       /* public string ToJSON()
-        {
-            string temp = "{\"name\": \"" + name + "\",\"password\": \"" + password +
-                            "\",\"email\": \"" + email + "\",\"nickname\": \"" + nickname +
-                            "\",\"wallet\": " + wallet + ",\"wagerOverride\": " + wagerOverride + "}";
-
-            return temp;
-        }*/
     }
 }

@@ -53,6 +53,17 @@ namespace SwamiAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+            string tempurl = url + "/" + id;
+
+            var content = new StringContent(JsonConvert.SerializeObject(value).ToString(), Encoding.UTF8, "application/json");
+
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+
+                var response = httpClient.PutAsync(new Uri(tempurl), content).Result;
+
+            }
         }
 
         // DELETE: api/ApiWithActions/5
@@ -123,25 +134,25 @@ namespace SwamiAPI.Controllers
         {
             foreach (Game myGame in myGames)
             {
-                if (myGame.FavoriteScore == 0 && myGame.UnderdogScore == 0)
+                if (myGame.favoriteScore == 0 && myGame.underdogScore == 0)
                 {
-                    myGame.Winner = "P";
+                    myGame.winner = "P";
                 }
                 else
                 {
-                    if (myGame.FavoriteScore - myGame.UnderdogScore == myGame.Line)
+                    if (myGame.favoriteScore - myGame.underdogScore == myGame.line)
                     {
-                        myGame.Winner = "P";
+                        myGame.winner = "P";
                     }
                     else
                     {
-                        if (myGame.FavoriteScore - myGame.UnderdogScore > myGame.Line)
+                        if (myGame.favoriteScore - myGame.underdogScore > myGame.line)
                         {
-                            myGame.Winner = "F";
+                            myGame.winner = "F";
                         }
                         else
                         {
-                            myGame.Winner = "U";
+                            myGame.winner = "U";
                         }
                     }
                 }
@@ -152,7 +163,7 @@ namespace SwamiAPI.Controllers
                 {
                     httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
                     string tempurl = url +"/"+ myGame._id;
-                    Console.WriteLine(myGame._id + myGame.HomeTeam);
+                    Console.WriteLine(myGame._id + myGame.homeTeam);
                     var response = httpClient.PutAsync(new Uri(tempurl), content).Result;  
                 }
             }

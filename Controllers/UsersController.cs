@@ -44,8 +44,16 @@ namespace SwamiAPI.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] User value)
         {
+            var content = new StringContent(JsonConvert.SerializeObject(value).ToString(), Encoding.UTF8, "application/json");
+
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+
+                var response = httpClient.PostAsync(new Uri(url), content).Result;
+            }
         }
 
         // PUT: api/Users/5
@@ -53,8 +61,7 @@ namespace SwamiAPI.Controllers
         public void Put(string id, [FromBody] User value)
         {
             string tempurl = url + "/" + id;
-            //Console.WriteLine("We made it and the user is " + value.ToJSON());
-
+            
             var content = new StringContent(JsonConvert.SerializeObject(value).ToString(), Encoding.UTF8, "application/json");
 
             using (var httpClient = new HttpClient())

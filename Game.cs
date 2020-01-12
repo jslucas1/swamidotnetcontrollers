@@ -7,18 +7,19 @@ namespace SwamiAPI
 {
     public class Game
     {
-        private string name;
-        private string favorite;
-        private string underdog;
-        private string favoriteName;
-        private string underdogName;
-        private double line;
-        private int week;
-        private string date;
-        private int favoriteScore;
-        private int underdogScore;
-        private string winner;
-        private string homeTeam;
+        public string _id {get; set;}
+        public string name { get; set; }
+        public string favorite { get; set; }
+        public string underdog { get; set; }
+        public string favoriteName { get; set; }
+        public string underdogName { get; set; }
+        public double line { get; set; }
+        public int week { get; set; }
+        public string date { get; set; }
+        public int favoriteScore { get; set; }
+        public int underdogScore { get; set; }
+        public string winner { get; set; }
+        public string homeTeam { get; set; }
 
         private static List<Team> myTeams = Team.GetAllTeams();
         public Game(string name, string id, string favorite, string underdog, double line, int week, string date, 
@@ -57,18 +58,6 @@ namespace SwamiAPI
             } 
         }
 
-        public string _id { get; set; }
-        public string Name { get => name; set => name = value; }
-        public string Favorite { get => favorite; set => favorite = value; }
-        public string Underdog { get => underdog; set => underdog = value; }
-        public double Line { get => line; set => line = value; }
-        public int Week { get => week; set => week = value; }
-        public string Date { get => date; set => date = value; }
-        public int FavoriteScore { get => favoriteScore; set => favoriteScore = value; }
-        public int UnderdogScore { get => underdogScore; set => underdogScore = value; }
-        public string Winner { get => winner; set => winner = value; }
-        public string HomeTeam { get => homeTeam; set => homeTeam = value; }
-        public string FavoriteName { get => favoriteName; set => favoriteName = value; }
-        public string UnderdogName { get => underdogName; set => underdogName = value; }
+        
     }
 }
