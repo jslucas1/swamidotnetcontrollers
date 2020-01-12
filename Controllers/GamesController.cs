@@ -38,7 +38,8 @@ namespace SwamiAPI.Controllers
         [HttpGet("setwinners/{mode}", Name = "SetWinner")]
         public string SetWinner(string mode)
         {
-            SetWinner(mode);
+            Console.WriteLine("To the endpoint");
+            SetWinners(mode);
             return "{ complete }";
         }
 
@@ -105,7 +106,6 @@ namespace SwamiAPI.Controllers
                 var response = httpClient.GetStringAsync(new Uri(url)).Result;
 
                 var releases = JArray.Parse(response);
-                Console.WriteLine(releases);
                 myGames = releases.ToObject<List<Game>>();
 
                 return myGames;
@@ -148,9 +148,15 @@ namespace SwamiAPI.Controllers
 
         private static void SetWinners(string mode)
         {
+            Console.WriteLine("in the setwinners method");
+            Console.WriteLine(mode);
+            GetAllGames();
             foreach (Game myGame in myGames)
-            {   if(mode == "all"||myGame.winner == null)
+            {
+                Console.WriteLine("in the loop" + myGame._id + " winner " + myGame.winner);
+                if(mode == "all"||myGame.winner == "") 
                 {
+                    Console.WriteLine(myGame._id);
                     if (myGame.favoriteScore == 0 && myGame.underdogScore == 0)
                     {
                         myGame.winner = "P";
