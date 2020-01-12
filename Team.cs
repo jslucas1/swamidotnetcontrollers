@@ -11,9 +11,10 @@ namespace SwamiAPI
 {
     public class Team
     {
-        private string Name;
-        private string League;
-        private string Conference;
+        public string _id { get; set; }
+        public string name { get; set; }
+        public string league { get; set; }
+        public string conference { get; set; }
 
         public Team(string id, string Name, string League, string Conference)
         {
@@ -23,11 +24,7 @@ namespace SwamiAPI
             conference = Conference;
         }
 
-        public string _id { get; set; }
-        public string name { get => Name; set => Name = value; }
-        public string league { get => League; set => League = value; }
-        public string conference { get => Conference; set => Conference = value; }
-
+       
         public Boolean Equals(string id)
         {
             return this._id == id;
