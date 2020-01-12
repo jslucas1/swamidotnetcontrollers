@@ -35,6 +35,14 @@ namespace SwamiAPI.Controllers
             return GetOneGame(id);
         }
 
+        [HttpGet("setwinners/{mode}", Name = "SetWinner")]
+        public string SetWinner(string mode)
+        {
+            SetWinner(mode);
+            return "{ complete }";
+        }
+
+
         // GET: api/Games/Week
         [HttpGet("week/{week}")]
         public IEnumerable<Game> GetWeek(string week)
@@ -138,32 +146,35 @@ namespace SwamiAPI.Controllers
             }
         }
 
-        private static void SetWinners()
+        private static void SetWinners(string mode)
         {
             foreach (Game myGame in myGames)
-            {
-                if (myGame.favoriteScore == 0 && myGame.underdogScore == 0)
+            {   if(mode == "all"||myGame.winner == null)
                 {
-                    myGame.winner = "P";
-                }
-                else
-                {
-                    if (myGame.favoriteScore - myGame.underdogScore == myGame.line)
+                    if (myGame.favoriteScore == 0 && myGame.underdogScore == 0)
                     {
                         myGame.winner = "P";
                     }
                     else
                     {
-                        if (myGame.favoriteScore - myGame.underdogScore > myGame.line)
+                        if (myGame.favoriteScore - myGame.underdogScore == myGame.line)
                         {
-                            myGame.winner = "F";
+                            myGame.winner = "P";
                         }
                         else
                         {
-                            myGame.winner = "U";
+                            if (myGame.favoriteScore - myGame.underdogScore > myGame.line)
+                            {
+                                myGame.winner = "F";
+                            }
+                            else
+                            {
+                                myGame.winner = "U";
+                            }
                         }
                     }
                 }
+                
 
                 //Save the updated record
                 var content = new StringContent(JsonConvert.SerializeObject(myGame).ToString(), Encoding.UTF8, "application/json");   
