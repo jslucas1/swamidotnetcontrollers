@@ -129,6 +129,20 @@ namespace SwamiAPI.Controllers
                 var releases = JArray.Parse(response);
                 List<Wager> myWeekWagers = releases.ToObject<List<Wager>>();
 
+                foreach (Wager myWager in myWeekWagers)
+                {
+                    Game myGame = JsonConvert.DeserializeObject<Game>(Game.GetOneGame(myWager.game));
+                    if (myWager.team == "favorite")
+                    {
+                        myWager.teamName = myGame.favoriteName;
+                    }
+                    else
+                    {
+                        myWager.teamName = myGame.underdogName;
+                    }
+                }
+
+
                 return myWeekWagers;
             }
         }
@@ -145,6 +159,19 @@ namespace SwamiAPI.Controllers
 
                 var releases = JArray.Parse(response);
                 List<Wager> myWeekWagers = releases.ToObject<List<Wager>>();
+
+                foreach (Wager myWager in myWeekWagers)
+                {
+                    Game myGame = JsonConvert.DeserializeObject<Game>(Game.GetOneGame(myWager.game));
+                    if (myWager.team == "favorite")
+                    {
+                        myWager.teamName = myGame.favoriteName;
+                    }
+                    else
+                    {
+                        myWager.teamName = myGame.underdogName;
+                    }
+                }
 
                 return myWeekWagers;
             }
