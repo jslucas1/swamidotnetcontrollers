@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net.Http;
+using System.Text;
 
 namespace SwamiAPI
 {
     public class Game
     {
+        //URL
+        private static string url = @"http://lucas-swami-api.herokuapp.com/games";
         public string _id {get; set;}
         public string name { get; set; }
         public string favorite { get; set; }
@@ -58,6 +64,20 @@ namespace SwamiAPI
             } 
         }
 
-        
+        public static string GetOneGame(string id)
+        {
+
+            //Route
+            using (var httpClient = new HttpClient())
+            {
+                string tempurl = url + "/" + id;
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+                var response = httpClient.GetStringAsync(new Uri(tempurl)).Result;
+
+                return response;
+            }
+        }
+
+
     }
 }

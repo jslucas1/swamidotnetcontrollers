@@ -97,10 +97,22 @@ namespace SwamiAPI.Controllers
                 var response = httpClient.GetStringAsync(new Uri(url)).Result;
 
                 var releases = JArray.Parse(response);
-                Console.WriteLine(releases);
                 myWagers = releases.ToObject<List<Wager>>();
 
-                return myWagers;
+                foreach (Wager myWager in myWagers)
+                {
+                    Game myGame = JsonConvert.DeserializeObject<Game>(Game.GetOneGame(myWager.game));
+                    if (myWager.team == "favorite")
+                    {
+                        myWager.teamName = myGame.favoriteName;
+                    }
+                    else
+                    {
+                        myWager.teamName = myGame.underdogName;
+                    }
+                }
+
+                    return myWagers;
             }
         }
 
